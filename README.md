@@ -78,3 +78,9 @@ Udacity Log Analysis Project
                ) total_requests
            WHERE
                 total_requests.date = error_report.date;
+    ```
+    | Column         | Type    |
+    | :--------------| :-------|
+    | date           | Date    |
+    | percent_error  | text    |
+    
