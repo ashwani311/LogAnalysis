@@ -5,7 +5,7 @@ Udacity Log Analysis Project
 
 * View 1: article_views
 
-  ```
+    ```
       CREATE VIEW
           article_views
       AS
@@ -36,4 +36,37 @@ Udacity Log Analysis Project
               CONCAT('/article/',a.slug) = v.path
            AND
               au.id = a.author;
-```
+    ```
+ 
+ * View 2: error_report
+ 
+    ```
+      CREATE VIEW 
+              error_report
+        AS
+          SELECT
+              error_report.date,
+              round(100*error_report.errors/total_requests.total,2) as percent_error
+          FROM
+              (SELECT
+                  date(time) as date,
+                  COUNT(*) as errors
+               FROM
+                  log
+               WHERE
+                  status != '200 OK'
+               GROUP BY
+                  date(time)
+               ORDER BY
+                  COUNT(*)
+               ) error_report,
+               (SELECT
+                  date(time) as date,
+                  COUNT(*) as total
+                FROM
+                  log
+                GROUP BY
+                  date
+               ) total_requests
+           WHERE
+                total_requests.date = error_report.date;
