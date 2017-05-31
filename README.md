@@ -37,8 +37,16 @@ Udacity Log Analysis Project
            AND
               au.id = a.author;
     ```
- 
- * View 2: error_report
+    | Column  | Type    |
+    | :-------| :-------|
+    | id      | Integer |
+    | author  | text    |
+    | title   | text    |
+    | name    | text    |
+    | views   | Integer |
+    
+
+* View 2: error_report
  
     ```
       CREATE VIEW 
